@@ -1,18 +1,18 @@
 package gomoku;
 
-public class stone 
+public class Stone 
 {
 	// data members
 	private boolean color;	// 0: black, 1: white
 
 	//  default constructor
-	public stone() 
+	public Stone() 
 	{
 		super();
 	}
 
 	// parameterized constructor
-	public stone(boolean color) 
+	public Stone(boolean color) 
 	{
 		super();
 		this.color = color;
