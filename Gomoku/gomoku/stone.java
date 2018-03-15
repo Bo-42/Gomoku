@@ -29,5 +29,11 @@ public class stone
 	{
 		this.color = color;
 	}
+
+	@Override
+	public String toString() 
+	{
+		return "stone [color=" + color + "]";
+	}
 	
 }	// end class
