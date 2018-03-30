@@ -6,6 +6,7 @@ import java.util.Arrays;
 public class GameData implements Serializable 
 {
 	// data members
+	private boolean whoseTurn;	// false = black, true = white
 	private Stone[][] board;	// the 15x15 grid (2D array) that stores stone objects
 	
 	// default constructor
@@ -19,6 +20,7 @@ public class GameData implements Serializable
 	public GameData( Stone[][] board ) 
 	{
 		super();
+		this.whoseTurn = true;
 		this.board = board;
 	}
 
@@ -32,6 +34,14 @@ public class GameData implements Serializable
 		this.board = board;
 	}
 	
+	public boolean isWhoseTurn() {
+		return whoseTurn;
+	}
+
+	public void setWhoseTurn(boolean whoseTurn) {
+		this.whoseTurn = whoseTurn;
+	}
+
 	public boolean checkMove( Move move )
 	{	// returns 1 (true) if game board grid location from move (row, column) contains a stone
 		// returns 0 (false) if game board grid location from move (row, column) is empty
