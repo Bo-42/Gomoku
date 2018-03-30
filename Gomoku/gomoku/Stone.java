@@ -3,7 +3,7 @@ package gomoku;
 public class Stone 
 {
 	// data members
-	private boolean color;	// 0: black, 1: white
+	private boolean color;	// 0:false: black, 1:true: white
 
 	//  default constructor
 	public Stone() 
