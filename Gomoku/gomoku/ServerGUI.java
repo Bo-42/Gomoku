@@ -137,6 +137,7 @@ public class ServerGUI extends JFrame
       // Handle the Listen button.
       if (buttonClicked == listen)
       {
+    	  System.out.println("hii");
         // Display an error if the port number or timeout was not entered.
         if (textFields[0].getText().equals("") || textFields[1].getText().equals(""))
         {
