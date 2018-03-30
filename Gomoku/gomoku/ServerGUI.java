@@ -133,11 +133,11 @@ public class ServerGUI extends JFrame
     {
       // Determine which button was clicked.
       Object buttonClicked = e.getSource();
-      
+      System.out.println("hi i am tset update");
       // Handle the Listen button.
       if (buttonClicked == listen)
       {
-    	  System.out.println("hii");
+    	
         // Display an error if the port number or timeout was not entered.
         if (textFields[0].getText().equals("") || textFields[1].getText().equals(""))
         {
