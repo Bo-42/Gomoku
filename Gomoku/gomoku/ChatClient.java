@@ -34,35 +34,26 @@ public class ChatClient extends AbstractClient
       String message = (String)arg0;
       
       // If we successfully logged in, tell the login controller.
-      if (message.equals("LoginSuccessful"))
+      if (message.equals("Success:Login"))
       {
         loginControl.loginSuccess();
       }
+      else if (message.equals("Failure:Login"))
+      {
+    	  loginControl.displayError("Failure:Login");
+      }
       
       // If we successfully created an account, tell the create account controller.
-      else if (message.equals("CreateAccountSuccessful"))
+      else if (message.equals("Success:Register"))
       {
         createAccountControl.createAccountSuccess();
       }
+      else if (message.equals("Failure:Register"))
+      {
+    	  createAccountControl.displayError("Failure:Register");
+      }
     }
+  
     
-    // If we received an Error, figure out where to display it.
-    else if (arg0 instanceof Error)
-    {
-      // Get the Error object.
-      Error error = (Error)arg0;
-      
-      // Display login errors using the login controller.
-      if (error.getType().equals("Login"))
-      {
-        loginControl.displayError(error.getMessage());
-      }
-      
-      // Display account creation errors using the create account controller.
-      else if (error.getType().equals("CreateAccount"))
-      {
-        createAccountControl.displayError(error.getMessage());
-      }
-    }
   }  
 }
