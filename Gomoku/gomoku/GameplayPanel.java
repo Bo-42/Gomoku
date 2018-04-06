@@ -15,10 +15,25 @@ public class GameplayPanel extends JPanel
 	public GameplayPanel(GameplayControl gpc) 
 	{
 		
+		//add one panel named background on the right panel
 	 JPanel right = new JPanel(new GridLayout(1, 1, 500, 500));
 	 JPanel background=new JPanel();
-	 background.setPreferredSize(new Dimension(100,100));
-	 background.setBackground(Color.pink);
+	background.setBackground(Color.pink);
+	background.addMouseListener(new MouseAdapter(){
+		
+		public void mousePress(MouseEvent e)
+		{
+			int xofpanel=e.getX();
+			int yofpanel=e.getY();
+			
+			int movex=(xofpanel-10)/30;
+			int movey=(yofpanel-10)/30;
+			Move mo=new Move(movex,movey);
+		}
+		
+		
+		
+	});
  	 right.add(background);
 	 JPanel left = new JPanel(new GridLayout(3, 1, 100, 160));
 	 JLabel labeltitle = new JLabel("Welcome to Gomoku !");
