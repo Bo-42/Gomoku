@@ -26,8 +26,9 @@ public class GameplayPanel extends JPanel
 			int xofpanel=e.getX();
 			int yofpanel=e.getY();
 			
-			int movex=(xofpanel-10)/30;
-			int movey=(yofpanel-10)/30;
+			int movex=Math.round((xofpanel-10)/30);
+			int movey=Math.round((yofpanel-10)/30);
+			
 			Move mo=new Move(movex,movey);
 		}
 		
