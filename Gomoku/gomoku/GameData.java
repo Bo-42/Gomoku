@@ -93,7 +93,7 @@ public class GameData implements Serializable
 					left = false;
 				}
 			}
-			if (!right || (i + idx) > 14 || board[move.getRow()][i - idx] == null)
+			if (!right || (i + idx) > 14 || board[move.getRow()][i + idx] == null)
 			{
 				right = false;
 			}
