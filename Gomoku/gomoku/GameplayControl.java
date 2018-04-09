@@ -54,7 +54,7 @@ public class GameplayControl implements ActionListener
 		
 	}
 
-	private void dispalylabel(String message) {
+	public void dispalylabel(String message) {
 		// TODO Auto-generated method stub
 		 GameplayPanel  gameplayPanel = (GameplayPanel)container.getComponent(3);
 		 gameplayPanel.setMessage(message);
