@@ -11,13 +11,13 @@ public class GameplayPanel extends JPanel
 {
 		private 	JLabel label ;
 		
-	  
+		JPanel background;
 	public GameplayPanel(GameplayControl gpc) 
 	{
 		
 		//add one panel named background on the right panel
 	 JPanel right = new JPanel(new GridLayout(1, 1, 500, 500));
-	 JPanel background=new JPanel();
+	background=new JPanel();
 	background.setBackground(Color.pink);
 	background.addMouseListener(new MouseAdapter(){
 		
@@ -29,7 +29,7 @@ public class GameplayPanel extends JPanel
 			int movex=Math.round((xofpanel-10)/30);
 			int movey=Math.round((yofpanel-10)/30);
 			
-			Move mo=new Move(movex,movey);
+			Move mo=new Move(movey,movex);
 		}
 		
 		
@@ -103,10 +103,29 @@ public class GameplayPanel extends JPanel
 		
 	}
 
-	public void drawChess(JPanel jpanel)
-	  {
-	  	
-	
+	public void drawChess(Stone[][] board)
+	  {//null is nothing 0 is black 1 is white
+		Graphics g=background.getGraphics();
+		for(int c=0;c<15;c++)
+		{
+		 for(int r=0;r<15;r++)
+		 {
+			 if(board[r][c]==null)
+			 {
+				 continue;
+			 }
+			 else if(board[r][c].getColor()==true)
+			 {
+				 g.fillOval(r*30+10,r*30+10,10,10);
+				 g.setColor(Color.white);
+			 }
+			 else if (board[r][c].getColor()==false)
+			 {
+				 g.fillOval(r*30+10,r*30+10,10,10);
+				 g.setColor(Color.black);
+			 }
+		 }
+		}
      
 	  }
 	

@@ -8,6 +8,8 @@ public class ChatClient extends AbstractClient
   private LoginControl loginControl;
   private CreateAccountControl createAccountControl;
   private GameplayControl gpc;
+  boolean whois;
+  GameplayPanel gp=new GameplayPanel(gpc);
   // Setters for the GUI controllers.
   public void setLoginControl(LoginControl loginControl)
   {
@@ -60,11 +62,31 @@ public class ChatClient extends AbstractClient
 	      }
 	    }
 	    else if (arg0 instanceof  GameData)
-	    {//get GameData object
-	    	GameData gd= (GameData)arg0;
+	    {
 	    	
-    	
-    	
+	    
+	    	if(((GameData) arg0).isWhoseTurn()==whois)
+	    	{
+	    		gpc.dispalylabel("Your move");
+	    		
+	    		
+	    		//update the game board
+	    		gp.drawChess(((GameData) arg0).getBoard());
+	    		
+	    	}
+	    	else
+	    		
+	    	{
+	    		gpc.dispalylabel("Other player's turn");
+	    	}
+	    	
+	    
+	    }
+	    else if (arg0 instanceof Boolean)
+	    {
+	    	whois=(boolean) arg0;
+	    	
+	    	
 	    }
   
     
