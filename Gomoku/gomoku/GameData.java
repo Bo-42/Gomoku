@@ -14,6 +14,7 @@ public class GameData implements Serializable
 	{
 		super();
 		board = new Stone[15][15];
+		whoseTurn = false;
 	}
 	
 	// parameterized constructor
@@ -54,7 +55,7 @@ public class GameData implements Serializable
 	
 	public void addStone( Move move, Stone stone )
 	{
-		this.board[ move.getRow() ][ move.getColumn() ].setColor( stone.getColor() );
+		this.board[move.getRow()][move.getColumn()] = new Stone(stone.getColor());
 	}
 	
 	public boolean checkWin( Move move)
