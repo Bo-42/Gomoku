@@ -14,6 +14,7 @@ public class GameData implements Serializable
 	{
 		super();
 		board = new Stone[15][15];
+		whoseTurn = false;
 	}
 	
 	// parameterized constructor

@@ -75,6 +75,13 @@ public class ChatServer extends AbstractServer
   public void clientConnected(ConnectionToClient client)
   {
     log.append("Client " + client.getId() + " connected\n");
+    try {
+		client.sendToClient(new Boolean (!clients.isEmpty()));
+		client.sendToClient(game);
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
     clients.add(client);
   }
 
@@ -147,9 +154,20 @@ public class ChatServer extends AbstractServer
     	{
     		clientNo = true;
     	}
+    	
+    	if (game.isWhoseTurn() != clientNo)
+    	{
+    		try {
+				client.sendToClient(game);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    		return;
+    	}
+    	
     	if (game.checkMove(move))
     	{
-    		game.setWhoseTurn(clientNo);
     		try {
 				client.sendToClient(game);
 			} catch (IOException e) {
@@ -175,6 +193,7 @@ public class ChatServer extends AbstractServer
     		}
     		else
     		{
+    			game.setWhoseTurn(!clientNo);
     			for (ConnectionToClient c : clients)
     			{
     				try {
