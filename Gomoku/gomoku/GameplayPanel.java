@@ -3,6 +3,7 @@ package gomoku;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 
@@ -10,8 +11,8 @@ import java.util.concurrent.TimeUnit;
 public class GameplayPanel extends JPanel
 {
 		private 	JLabel label ;
-		
-		JPanel background;
+		private ChatClient client;
+		private JPanel background;
 	public GameplayPanel(GameplayControl gpc) 
 	{
 		
@@ -30,6 +31,12 @@ public class GameplayPanel extends JPanel
 			int movey=Math.round((yofpanel-10)/30);
 			
 			Move mo=new Move(movey,movex);
+			try {
+				client.sendToServer(mo);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		
 		
@@ -135,4 +142,9 @@ public class GameplayPanel extends JPanel
 	    label.setText(message);
      
 	  }
+	
+	public void setClient(ChatClient client)
+	{
+		this.client = client;
+	}
 }

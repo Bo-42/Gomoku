@@ -27,6 +27,7 @@ public class ChatClient extends AbstractClient
   public ChatClient()
   {
     super("localhost", 8300);
+    gp.setClient(this);
   }
   
   // Method that handles messages from the server.

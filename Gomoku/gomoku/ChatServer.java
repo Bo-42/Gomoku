@@ -75,13 +75,6 @@ public class ChatServer extends AbstractServer
   public void clientConnected(ConnectionToClient client)
   {
     log.append("Client " + client.getId() + " connected\n");
-    try {
-		client.sendToClient(new Boolean (!clients.isEmpty()));
-		client.sendToClient(game);
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
     clients.add(client);
   }
 
@@ -98,6 +91,13 @@ public class ChatServer extends AbstractServer
     		log.append(loginData.getUsername() + " successfully logged in!\n");
     		try {
 				client.sendToClient("Success:Login");
+			    try {
+					client.sendToClient(new Boolean (clients.get(0).getId() != client.getId()));
+					client.sendToClient(game);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
