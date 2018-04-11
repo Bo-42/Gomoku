@@ -1,6 +1,8 @@
 package gomoku;
 
-public class Stone 
+import java.io.Serializable;
+
+public class Stone implements Serializable
 {
 	// data members
 	private boolean color;	// 0:false: black, 1:true: white

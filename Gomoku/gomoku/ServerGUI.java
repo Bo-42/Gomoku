@@ -133,7 +133,6 @@ public class ServerGUI extends JFrame
     {
       // Determine which button was clicked.
       Object buttonClicked = e.getSource();
-      System.out.println("hi i am tset update");
       // Handle the Listen button.
       if (buttonClicked == listen)
       {

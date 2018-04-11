@@ -1,5 +1,7 @@
 package gomoku;
 
+import java.io.ObjectOutputStream;
+
 import ocsf.client.AbstractClient;
 
 public class ChatClient extends AbstractClient
@@ -9,7 +11,7 @@ public class ChatClient extends AbstractClient
   private CreateAccountControl createAccountControl;
   private GameplayControl gpc;
   boolean whois;
-  GameplayPanel gp=new GameplayPanel(gpc);
+  GameplayPanel gp;
   // Setters for the GUI controllers.
   public void setLoginControl(LoginControl loginControl)
   {
@@ -27,7 +29,7 @@ public class ChatClient extends AbstractClient
   public ChatClient()
   {
     super("localhost", 8300);
-    gp.setClient(this);
+    gp = new GameplayPanel(gpc, this);
   }
   
   // Method that handles messages from the server.
@@ -79,14 +81,14 @@ public class ChatClient extends AbstractClient
 	    		
 	    	{
 	    		gpc.dispalylabel("Other player's turn");
+	    		gp.drawChess(((GameData) arg0).getBoard());
 	    	}
 	    	
 	    
 	    }
 	    else if (arg0 instanceof Boolean)
 	    {
-	    	whois=(boolean) arg0;
-	    	
+	    	whois=((Boolean) arg0).booleanValue();
 	    	
 	    }
   

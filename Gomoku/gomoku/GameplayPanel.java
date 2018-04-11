@@ -13,19 +13,26 @@ public class GameplayPanel extends JPanel
 		private 	JLabel label ;
 		private ChatClient client;
 		private JPanel background;
-	public GameplayPanel(GameplayControl gpc) 
-	{
 		
+	public GameplayPanel(GameplayControl gpc, ChatClient client) 
+	{
+		this.client = client;
 		//add one panel named background on the right panel
 	 JPanel right = new JPanel(new GridLayout(1, 1, 500, 500));
 	background=new JPanel();
 	background.setBackground(Color.pink);
-	background.addMouseListener(new MouseAdapter(){
+	background.addMouseListener(new MouseListener(){
 		
 		public void mousePress(MouseEvent e)
 		{
-			int xofpanel=e.getX();
-			int yofpanel=e.getY();
+			
+		}
+
+		@Override
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			int xofpanel=arg0.getX();
+			int yofpanel=arg0.getY();
 			
 			int movex=Math.round((xofpanel-10)/30);
 			int movey=Math.round((yofpanel-10)/30);
@@ -37,6 +44,30 @@ public class GameplayPanel extends JPanel
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
 		}
 		
 		
@@ -57,6 +88,7 @@ public class GameplayPanel extends JPanel
 	but.add(quit);
 	but.add(exit);
 	btnStart.addActionListener(gpc);
+	
 	
 	btnStart.addActionListener(new ActionListener()
 				{
@@ -142,9 +174,4 @@ public class GameplayPanel extends JPanel
 	    label.setText(message);
      
 	  }
-	
-	public void setClient(ChatClient client)
-	{
-		this.client = client;
-	}
 }

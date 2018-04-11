@@ -1,6 +1,8 @@
 package gomoku;
 
-public class Move 
+import java.io.Serializable;
+
+public class Move implements Serializable
 {
 	// private data members
 	private int row;

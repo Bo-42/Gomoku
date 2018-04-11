@@ -91,13 +91,8 @@ public class ChatServer extends AbstractServer
     		log.append(loginData.getUsername() + " successfully logged in!\n");
     		try {
 				client.sendToClient("Success:Login");
-			    try {
-					client.sendToClient(new Boolean (clients.get(0).getId() != client.getId()));
-					client.sendToClient(game);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				client.sendToClient(new Boolean (clients.get(0).getId() != client.getId()));
+				client.sendToClient(game);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -124,6 +119,8 @@ public class ChatServer extends AbstractServer
     		log.append(createAccountData.getUsername() + " successfully registered!\n");
     		try {
 				client.sendToClient("Success:Register");
+				client.sendToClient(new Boolean (clients.get(0).getId() != client.getId()));
+				client.sendToClient(game);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -184,25 +181,23 @@ public class ChatServer extends AbstractServer
     			for (ConnectionToClient c : clients)
     			{
     				try {
-						c.sendToClient("Winner:" + clientNo);
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+    					c.sendToClient("Winner:" + clientNo);
+    				} catch (IOException e) {
+    					// TODO Auto-generated catch block
+    					e.printStackTrace();
+    				}
     			}
     		}
     		else
     		{
     			game.setWhoseTurn(!clientNo);
-    			for (ConnectionToClient c : clients)
-    			{
-    				try {
-						c.sendToClient(game);
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-    			}
+    			try {
+					clients.get(0).sendToClient(game);
+					clients.get(1).sendToClient(game);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
     		}
     	}
     }
