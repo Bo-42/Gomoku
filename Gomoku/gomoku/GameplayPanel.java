@@ -4,6 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 
@@ -14,13 +15,14 @@ public class GameplayPanel extends JPanel
     private ChatClient client;
     private JPanel background;
     private Graphics g;
+    private Stone bo[][];
+    GameData gd=new GameData();
   public GameplayPanel(GameplayControl gpc, ChatClient client) 
   {
     this.client = client;
     //add one panel named background on the right panel
    JPanel right = new JPanel(new GridLayout(1, 1, 480, 480));
-  background=new JPanel();
-  background.setBackground(Color.pink);
+   background=new JPanel();
   background.addMouseListener(new MouseListener(){
     
     public void mousePress(MouseEvent e)
@@ -31,13 +33,24 @@ public class GameplayPanel extends JPanel
     @Override
     public void mouseClicked(MouseEvent arg0) {
       // TODO Auto-generated method stub
-      int xofpanel=arg0.getX();
-      int yofpanel=arg0.getY();
+      double xofpanel=arg0.getX();
+      double yofpanel=arg0.getY();
+  ;
+   
+      int movex=(int) Math.round((xofpanel-10)/30);
+      int movey=(int) Math.round((yofpanel-10)/30);
+   
       
-      int movex=Math.round((xofpanel-10)/30);
-      int movey=Math.round((yofpanel-10)/30);
-      System.out.print(movex+" "+movey);
+      System.out.println(movex+" "+movey);
       Move mo=new Move(movey,movex);
+      
+     
+     if(gd.checkMove(mo)==false)
+     { g=background.getGraphics();
+       g.fillOval((movex)*30+5,(movey)*30+5,15,15);
+       g.setColor(Color.black);
+     }
+     
       try {
         client.sendToServer(mo);
       } catch (IOException e1) {
@@ -77,14 +90,14 @@ public class GameplayPanel extends JPanel
    JPanel left = new JPanel(new GridLayout(3, 1, 100, 160));
    JLabel labeltitle = new JLabel("Welcome to Gomoku !");
    labeltitle.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 46));
-   JPanel but = new JPanel(new GridLayout(1,3, 100, 160));
-  JButton btnStart = new JButton("Let's Start it");
+   JPanel but = new JPanel(new GridLayout(1,2, 100, 160));
+  //JButton btnStart = new JButton("Let's Start it");
 
   JButton exit = new JButton("Exit");
   JButton quit = new JButton("Quit");
   quit.addActionListener(gpc);
   exit.addActionListener(gpc);
-  but.add(btnStart);
+ // but.add(btnStart);
   but.add(quit);
   but.add(exit);
   exit.addActionListener(new ActionListener()
@@ -102,7 +115,7 @@ public class GameplayPanel extends JPanel
     
     );  
     label = new JLabel("");
-    label.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 46));
+    label.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 44));
     left.add(labeltitle);
     left.add(label);
     left.add(but);
@@ -115,55 +128,54 @@ public class GameplayPanel extends JPanel
     
       
   }
-  public void paintComponents(Graphics g)
-  {
-    g=background.getGraphics();
-    super.paintComponents(g);
-      for(int i=0;i<15;i++)
-      {
-        g.drawLine(10,i*30+10,460, i*30+10);
-        g.drawLine(i*30+10,10,i*30+10,460);
-      }
-    
-  }
+ 
+  
   public void drawChess(Stone[][] board)
-    {
-      //null is nothing 0 is black 1 is white
+    {//NULL is nothing 1 is white 0 is black
     g=background.getGraphics();
+
     for(int c=0;c<15;c++)
     {
-     for(int r=0;r<15;r++)
-     {
-       if(board[r][c]==null)
-       {
-         continue;
-       }
-       else if(board[r][c].getColor()==true)
-       {
-         g.fillOval(r*30+10,r*30+10,10,10);
-         g.setColor(Color.white);
-       }
-       else if (board[r][c].getColor()==false)
-       {
-         g.fillOval(r*30+10,r*30+10,10,10);
-         g.setColor(Color.black);
-       }
-     }
-    }
-    background.repaint();
+      for(int r=0;r<15;r++)
+      {
+        if(board[r][c]==null)
+        {
+       continue;
+        }
+        else if(board[r][c].getColor()==true)
+        {     
+        g.fillOval(r*30+5,c*30+5,15,15);
+        g.setColor(Color.white);
+        }
+        else if (board[r][c].getColor()==false)
+        {  
+     
+          g=background.getGraphics();
+          g.fillOval(r*30+5,c*30+5,15,15);
+          g.setColor(Color.black);
+     
+        }
+      }
     }
   
+ 
+ }
+
   public void setMessage(String message)
     {
       
       label.setText(message);
       g=background.getGraphics();
       
-     for(int i=0;i<15;i++)
-   {
+    for(int i=0;i<15;i++)
+      {
        g.drawLine(10,i*30+10,430, i*30+10);
        g.drawLine(i*30+10,10,i*30+10,430);
       }
-     
+
     }
+  
+ 
+  
+   
 }
