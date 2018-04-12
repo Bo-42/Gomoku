@@ -143,6 +143,9 @@ public class ChatServer extends AbstractServer
     	boolean clientNo;
     	Move move = (Move)arg0;
     	
+    	GameData update = new GameData(game.getBoard(), game.isWhoseTurn());
+    	game = update;
+    	
     	if (id == clients.get(0).getId())
     	{
     		clientNo = false;

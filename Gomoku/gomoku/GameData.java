@@ -18,10 +18,10 @@ public class GameData implements Serializable
 	}
 	
 	// parameterized constructor
-	public GameData( Stone[][] board ) 
+	public GameData( Stone[][] board, boolean whoseTurn) 
 	{
 		super();
-		this.whoseTurn = true;
+		this.whoseTurn = whoseTurn;
 		this.board = board;
 	}
 
