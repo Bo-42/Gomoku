@@ -35,7 +35,7 @@ public class GameplayPanel extends JPanel
       // TODO Auto-generated method stub
       double xofpanel=arg0.getX();
       double yofpanel=arg0.getY();
-  ;
+  
    
       int movex=(int) Math.round((xofpanel-10)/30);
       int movey=(int) Math.round((yofpanel-10)/30);
