@@ -34,7 +34,7 @@ public class Stone implements Serializable
 	
 	public boolean equals(Stone stone)
 	{
-		if (this.color = stone.getColor())
+		if (this.color == stone.getColor())
 		{
 			return true;
 		}

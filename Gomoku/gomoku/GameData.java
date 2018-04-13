@@ -8,6 +8,7 @@ public class GameData implements Serializable
 	// data members
 	private boolean whoseTurn;	// false = black, true = white
 	private Stone[][] board;	// the 15x15 grid (2D array) that stores stone objects
+	private boolean won = false;
 	
 	// default constructor
 	public GameData() 
@@ -22,7 +23,18 @@ public class GameData implements Serializable
 	{
 		super();
 		this.whoseTurn = whoseTurn;
-		this.board = board;
+		this.board = new Stone[15][15];
+		for (int r = 0; r < 15; r++)
+		{
+			for (int c = 0; c < 15; c++)
+			{
+				if (board[r][c] == null)
+				{
+					continue;
+				}
+				this.board[r][c] = new Stone(board[r][c].getColor());
+			}
+		}
 	}
 
 	public Stone[][] getBoard() 
@@ -53,9 +65,9 @@ public class GameData implements Serializable
 			return true;
 	}
 	
-	public void addStone( Move move, Stone stone )
+	public void addStone( Move move, boolean color )
 	{
-		this.board[move.getRow()][move.getColumn()] = new Stone(stone.getColor());
+		this.board[move.getRow()][move.getColumn()] = new Stone(color);
 	}
 	
 	public boolean checkWin( Move move)
@@ -66,6 +78,16 @@ public class GameData implements Serializable
 			return true;
 		}
 		return false;
+	}
+	
+	public boolean checkWon()
+	{
+		return won;
+	}
+	
+	public void resignWin()
+	{
+		won = true;
 	}
 	
 	private boolean checkHorizontal(Move move)
@@ -111,6 +133,7 @@ public class GameData implements Serializable
 			}
 			if (lineCount > 4)
 			{
+				won = true;
 				return true;
 			}
 			else if (!left && !right)
@@ -164,6 +187,7 @@ public class GameData implements Serializable
 			}
 			if (lineCount > 4)
 			{
+				won = true;
 				return true;
 			}
 			else if (!up && !down)
@@ -218,6 +242,7 @@ public class GameData implements Serializable
 			}
 			if (lineCount > 4)
 			{
+				won = true;
 				return true;
 			}
 			else if (!topL && !bottomR)
@@ -263,6 +288,7 @@ public class GameData implements Serializable
 			}
 			if (lineCount > 4)
 			{
+				won = true;
 				return true;
 			}
 			else if (!topR && !bottomL)

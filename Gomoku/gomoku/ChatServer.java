@@ -1,6 +1,8 @@
 package gomoku;
 
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
+
 import javax.swing.*;
 
 import gomoku.LoginData;
@@ -143,9 +145,6 @@ public class ChatServer extends AbstractServer
     	boolean clientNo;
     	Move move = (Move)arg0;
     	
-    	GameData update = new GameData(game.getBoard(), game.isWhoseTurn());
-    	game = update;
-    	
     	if (id == clients.get(0).getId())
     	{
     		clientNo = false;
@@ -155,18 +154,20 @@ public class ChatServer extends AbstractServer
     		clientNo = true;
     	}
     	
-    	if (game.isWhoseTurn() != clientNo)
+    	if (move.getRow() == -1)
     	{
+    		game.setWhoseTurn(!clientNo);
+    		game.resignWin();
     		try {
-				client.sendToClient(game);
+				clients.get(0).sendToClient(game);
+				clients.get(1).sendToClient(game);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
     		return;
     	}
-    	
-    	if (game.checkMove(move))
+    	else if (game.isWhoseTurn() != clientNo)
     	{
     		try {
 				client.sendToClient(game);
@@ -174,34 +175,46 @@ public class ChatServer extends AbstractServer
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+    		System.out.println("Not your turn");
+    		return;
+    	}
+    	else if (game.checkMove(move))
+    	{
+    		try {
+				client.sendToClient(game);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    		System.out.println("Invalid move");
+    		return;
+    	}
+    	
+    	game.addStone(move, clientNo);
+    	
+    	if (game.checkWin(move))
+    	{
+    		log.append(clientNo + " wins!\n");
+    		for (ConnectionToClient c : clients)
+    		{
+    			try {
+    				c.sendToClient(game);
+    			} catch (IOException e) {
+    				// TODO Auto-generated catch block
+    				e.printStackTrace();
+    			}
+    		}
     	}
     	else
     	{
-    		game.addStone(move, new Stone(clientNo));
-    		if (game.checkWin(move))
-    		{
-    			log.append(clientNo + " wins!\n");
-    			for (ConnectionToClient c : clients)
-    			{
-    				try {
-    					c.sendToClient("Winner:" + clientNo);
-    				} catch (IOException e) {
-    					// TODO Auto-generated catch block
-    					e.printStackTrace();
-    				}
-    			}
-    		}
-    		else
-    		{
-    			game.setWhoseTurn(!clientNo);
-    			try {
-					clients.get(0).sendToClient(game);
-					clients.get(1).sendToClient(game);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-    		}
+    		game.setWhoseTurn(!clientNo);
+    		try {
+				clients.get(0).sendToClient(game);
+				clients.get(1).sendToClient(game);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
     	}
     }
   }

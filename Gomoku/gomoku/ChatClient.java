@@ -11,7 +11,6 @@ public class ChatClient extends AbstractClient
   private CreateAccountControl createAccountControl;
   private GameplayControl gpc;
   boolean whois;
-  GameplayPanel gp;
   // Setters for the GUI controllers.
   public void setLoginControl(LoginControl loginControl)
   {
@@ -29,7 +28,6 @@ public class ChatClient extends AbstractClient
   public ChatClient()
   {
     super("localhost", 8300);
-    gp = new GameplayPanel(gpc, this);
   }
   
   // Method that handles messages from the server.
@@ -61,7 +59,7 @@ public class ChatClient extends AbstractClient
 	      }
 	      else if (message.substring(0, 6).equals("Winner:"))
 	     {
-	    	 gpc.dispalylabel(message);
+	    	 gpc.displayLabel(message);
 	      }
 	    }
 	    else if (arg0 instanceof  GameData)
@@ -70,18 +68,33 @@ public class ChatClient extends AbstractClient
 	    
 	    	if(((GameData) arg0).isWhoseTurn()==whois)
 	    	{
-	    		gpc.dispalylabel("Your move");
+	    		if (((GameData) arg0).checkWon())
+	    		{
+	    			gpc.displayLabel("You won!");
+	    			gpc.stopMouse();
+	    		}
+	    		else
+	    		{
+	    			gpc.displayLabel("Your move");
+	    		}
 	    		
 	    		
 	    		//update the game board
-	    		gp.drawChess(((GameData) arg0).getBoard());
+	    		gpc.drawChess(((GameData) arg0).getBoard());
 	    		
 	    	}
 	    	else
-	    		
 	    	{
-	    		gpc.dispalylabel("Other player's turn");
-	    		gp.drawChess(((GameData) arg0).getBoard());
+	    		if (((GameData) arg0).checkWon())
+	    		{
+	    			gpc.displayLabel("Opponent wins!");
+	    			gpc.stopMouse();
+	    		}
+	    		else
+	    		{
+	    			gpc.displayLabel("Other player's turn");
+	    		}
+	    		gpc.drawChess(((GameData) arg0).getBoard());
 	    	}
 	    	
 	    
@@ -89,7 +102,7 @@ public class ChatClient extends AbstractClient
 	    else if (arg0 instanceof Boolean)
 	    {
 	    	whois=((Boolean) arg0).booleanValue();
-	    	
+	    	gpc.setPlayer(((Boolean) arg0).booleanValue());
 	    }
   
     
