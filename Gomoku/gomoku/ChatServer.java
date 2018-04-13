@@ -208,9 +208,9 @@ public class ChatServer extends AbstractServer
     	else
     	{
     		game.setWhoseTurn(!clientNo);
+    		for (ConnectionToClient c : clients)
     		try {
-				clients.get(0).sendToClient(game);
-				clients.get(1).sendToClient(game);
+				c.sendToClient(game);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

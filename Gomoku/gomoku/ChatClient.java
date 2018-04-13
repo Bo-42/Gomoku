@@ -1,7 +1,5 @@
 package gomoku;
 
-import java.io.ObjectOutputStream;
-
 import ocsf.client.AbstractClient;
 
 public class ChatClient extends AbstractClient
