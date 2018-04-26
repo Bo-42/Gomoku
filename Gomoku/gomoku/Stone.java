@@ -5,33 +5,33 @@ import java.io.Serializable;
 public class Stone implements Serializable
 {
 	// data members
-	private boolean color;	// 0:false: black, 1:true: white
+	private boolean color; // 0:false: black, 1:true: white
 
-	//  default constructor
-	public Stone() 
+	// default constructor
+	public Stone()
 	{
 		super();
 	}
 
 	// parameterized constructor
-	public Stone(boolean color) 
+	public Stone(boolean color)
 	{
 		super();
 		this.color = color;
 	}
 
 	// getter
-	public boolean getColor() 
+	public boolean getColor()
 	{
 		return color;
 	}
 
 	// setter
-	public void setColor(boolean color) 
+	public void setColor(boolean color)
 	{
 		this.color = color;
 	}
-	
+
 	public boolean equals(Stone stone)
 	{
 		if (this.color == stone.getColor())
@@ -42,9 +42,9 @@ public class Stone implements Serializable
 	}
 
 	@Override
-	public String toString() 
+	public String toString()
 	{
 		return "stone [color=" + color + "]";
 	}
-	
-}	// end class
+
+} // end class

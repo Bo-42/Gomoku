@@ -5,11 +5,11 @@ import java.io.Serializable;
 public class Move implements Serializable
 {
 	// private data members
-	private int row;
-	private int column;
-	
+	private int	row;
+	private int	column;
+
 	// default constructor
-	public Move() 
+	public Move()
 	{
 		super();
 		this.row = 0;
@@ -17,32 +17,37 @@ public class Move implements Serializable
 	}
 
 	// parameterized constructor
-	public Move(int row, int column) 
+	public Move(int row, int column)
 	{
 		super();
 		this.row = row;
 		this.column = column;
 	}
 
-	public int getRow() {
+	public int getRow()
+	{
 		return row;
 	}
 
-	public void setRow(int row) {
+	public void setRow(int row)
+	{
 		this.row = row;
 	}
 
-	public int getColumn() {
+	public int getColumn()
+	{
 		return column;
 	}
 
-	public void setColumn(int column) {
+	public void setColumn(int column)
+	{
 		this.column = column;
 	}
 
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		return "Move [row=" + row + ", column=" + column + "]";
 	}
-	
+
 }

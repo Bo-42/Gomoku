@@ -3,23 +3,23 @@ package gomoku;
 import java.io.Serializable;
 import java.util.Arrays;
 
-public class GameData implements Serializable 
+public class GameData implements Serializable
 {
 	// data members
-	private boolean whoseTurn;	// false = black, true = white
-	private Stone[][] board;	// the 15x15 grid (2D array) that stores stone objects
-	private boolean won = false;
-	
+	private boolean		whoseTurn;	// false = black, true = white
+	private Stone[][]	board;		// the 15x15 grid (2D array) that stores stone objects
+	private boolean		won	= false;
+
 	// default constructor
-	public GameData() 
+	public GameData()
 	{
 		super();
 		board = new Stone[15][15];
 		whoseTurn = false;
 	}
-	
+
 	// parameterized constructor
-	public GameData( Stone[][] board, boolean whoseTurn) 
+	public GameData(Stone[][] board, boolean whoseTurn)
 	{
 		super();
 		this.whoseTurn = whoseTurn;
@@ -37,41 +37,44 @@ public class GameData implements Serializable
 		}
 	}
 
-	public Stone[][] getBoard() 
+	public Stone[][] getBoard()
 	{
 		return board;
 	}
 
-	public void setBoard( Stone[][] board ) 
+	public void setBoard(Stone[][] board)
 	{
 		this.board = board;
 	}
-	
-	public boolean isWhoseTurn() {
+
+	public boolean isWhoseTurn()
+	{
 		return whoseTurn;
 	}
 
-	public void setWhoseTurn(boolean whoseTurn) {
+	public void setWhoseTurn(boolean whoseTurn)
+	{
 		this.whoseTurn = whoseTurn;
 	}
 
-	public boolean checkMove( Move move )
-	{	// returns 1 (true) if game board grid location from move (row, column) contains a stone
-		// returns 0 (false) if game board grid location from move (row, column) is empty
-		
-		if ( board[move.getRow()][move.getColumn()] == null)
+	public boolean checkMove(Move move)
+	{ // returns 1 (true) if game board grid location from move (row, column) contains
+		// a stone
+		// returns 0 (false) if game board grid location from move (row, column) is
+		// empty
+		if (board[move.getRow()][move.getColumn()] == null)
 			return false;
 		else
 			return true;
 	}
-	
-	public void addStone( Move move, boolean color )
+
+	public void addStone(Move move, boolean color)
 	{
 		this.board[move.getRow()][move.getColumn()] = new Stone(color);
 	}
-	
-	public boolean checkWin( Move move)
-	{	// returns a 1 (true) if a move creates a winning condition
+
+	public boolean checkWin(Move move)
+	{ // returns a 1 (true) if a move creates a winning condition
 		// returns a 0 (false) if a move does not create a winning condition
 		if (checkHorizontal(move) || checkVertical(move) || checkDiagonal(move))
 		{
@@ -79,17 +82,17 @@ public class GameData implements Serializable
 		}
 		return false;
 	}
-	
+
 	public boolean checkWon()
 	{
 		return won;
 	}
-	
+
 	public void resignWin()
 	{
 		won = true;
 	}
-	
+
 	private boolean checkHorizontal(Move move)
 	{
 		Stone moveColor = board[move.getRow()][move.getColumn()];
@@ -98,20 +101,18 @@ public class GameData implements Serializable
 		int lineCount = 1;
 		boolean left, right;
 		left = right = true;
-		
+
 		for (; idx < 5; idx++)
 		{
 			if (!left || (i - idx) < 0 || board[move.getRow()][i - idx] == null)
 			{
 				left = false;
-			}
-			else
+			} else
 			{
 				if (moveColor.equals(board[move.getRow()][i - idx]))
 				{
 					lineCount++;
-				}
-				else
+				} else
 				{
 					left = false;
 				}
@@ -119,14 +120,12 @@ public class GameData implements Serializable
 			if (!right || (i + idx) > 14 || board[move.getRow()][i + idx] == null)
 			{
 				right = false;
-			}
-			else
+			} else
 			{
 				if (moveColor.equals(board[move.getRow()][i + idx]))
 				{
 					lineCount++;
-				}
-				else
+				} else
 				{
 					right = false;
 				}
@@ -135,15 +134,14 @@ public class GameData implements Serializable
 			{
 				won = true;
 				return true;
-			}
-			else if (!left && !right)
+			} else if (!left && !right)
 			{
 				return false;
 			}
 		}
 		return false;
 	}
-	
+
 	private boolean checkVertical(Move move)
 	{
 		Stone moveColor = board[move.getRow()][move.getColumn()];
@@ -152,20 +150,18 @@ public class GameData implements Serializable
 		int lineCount = 1;
 		boolean up, down;
 		up = down = true;
-		
+
 		for (; idx < 5; idx++)
 		{
 			if (!up || (i - idx) < 0 || board[i - idx][move.getColumn()] == null)
 			{
 				up = false;
-			}
-			else
+			} else
 			{
 				if (moveColor.equals(board[i - idx][move.getColumn()]))
 				{
 					lineCount++;
-				}
-				else
+				} else
 				{
 					up = false;
 				}
@@ -173,14 +169,12 @@ public class GameData implements Serializable
 			if (!down || (i + idx) > 14 || board[i + idx][move.getColumn()] == null)
 			{
 				down = false;
-			}
-			else
+			} else
 			{
 				if (moveColor.equals(board[i + idx][move.getColumn()]))
 				{
 					lineCount++;
-				}
-				else
+				} else
 				{
 					down = false;
 				}
@@ -189,15 +183,14 @@ public class GameData implements Serializable
 			{
 				won = true;
 				return true;
-			}
-			else if (!up && !down)
+			} else if (!up && !down)
 			{
 				return false;
 			}
 		}
 		return false;
 	}
-	
+
 	private boolean checkDiagonal(Move move)
 	{
 		Stone moveColor = board[move.getRow()][move.getColumn()];
@@ -207,20 +200,18 @@ public class GameData implements Serializable
 		int lineCount = 1;
 		boolean topL, topR, bottomL, bottomR;
 		topL = topR = bottomL = bottomR = true;
-		
+
 		for (; idx < 5; idx++)
 		{
 			if (!topL || (r - idx) < 0 || (c - idx) < 0 || board[r - idx][c - idx] == null)
 			{
 				topL = false;
-			}
-			else
+			} else
 			{
 				if (moveColor.equals(board[r - idx][c - idx]))
 				{
 					lineCount++;
-				}
-				else
+				} else
 				{
 					topL = false;
 				}
@@ -228,14 +219,12 @@ public class GameData implements Serializable
 			if (!bottomR || (r + idx) > 14 || (c + idx) > 14 || board[r + idx][c + idx] == null)
 			{
 				bottomR = false;
-			}
-			else
+			} else
 			{
 				if (moveColor.equals(board[r + idx][c + idx]))
 				{
 					lineCount++;
-				}
-				else
+				} else
 				{
 					bottomR = false;
 				}
@@ -244,29 +233,26 @@ public class GameData implements Serializable
 			{
 				won = true;
 				return true;
-			}
-			else if (!topL && !bottomR)
+			} else if (!topL && !bottomR)
 			{
 				break;
 			}
 		}
-		
+
 		lineCount = 1;
 		idx = 1;
-		
+
 		for (; idx < 5; idx++)
 		{
 			if (!topR || (r - idx) < 0 || (c + idx) > 14 || board[r - idx][c + idx] == null)
 			{
 				topR = false;
-			}
-			else
+			} else
 			{
 				if (moveColor.equals(board[r - idx][c + idx]))
 				{
 					lineCount++;
-				}
-				else
+				} else
 				{
 					topR = false;
 				}
@@ -274,14 +260,12 @@ public class GameData implements Serializable
 			if (!bottomL || (r + idx) > 14 || (c - idx) < 0 || board[r + idx][c - idx] == null)
 			{
 				bottomL = false;
-			}
-			else
+			} else
 			{
 				if (moveColor.equals(board[r + idx][c - idx]))
 				{
 					lineCount++;
-				}
-				else
+				} else
 				{
 					bottomL = false;
 				}
@@ -290,8 +274,7 @@ public class GameData implements Serializable
 			{
 				won = true;
 				return true;
-			}
-			else if (!topR && !bottomL)
+			} else if (!topR && !bottomL)
 			{
 				return false;
 			}
@@ -300,9 +283,9 @@ public class GameData implements Serializable
 	}
 
 	@Override
-	public String toString() 
+	public String toString()
 	{
 		return "GameData [board=" + Arrays.toString(board) + "]";
 	}
-	
-}	// end class
+
+} // end class
