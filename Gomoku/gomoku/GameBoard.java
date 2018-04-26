@@ -57,11 +57,13 @@ public class GameBoard extends JPanel
 				if (board[r][c] == null)
 				{
 					continue;
-				} else if (board[r][c].getColor() == true)
+				}
+				else if (board[r][c].getColor() == true)
 				{
 					g2d.setColor(Color.white);
 					g2d.fill(new Ellipse2D.Double(r * 30 + 5, c * 30 + 5, 15, 15));
-				} else if (board[r][c].getColor() == false)
+				}
+				else if (board[r][c].getColor() == false)
 				{
 					g2d.setColor(Color.black);
 					g2d.fill(new Ellipse2D.Double(r * 30 + 5, c * 30 + 5, 15, 15));

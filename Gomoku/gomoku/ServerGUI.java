@@ -153,7 +153,8 @@ public class ServerGUI extends JFrame
 					try
 					{
 						server.listen();
-					} catch (IOException e1)
+					}
+					catch (IOException e1)
 					{
 						log.append("An exception occurred: " + e1.getMessage() + "\n");
 					}
@@ -175,7 +176,8 @@ public class ServerGUI extends JFrame
 					try
 					{
 						server.close();
-					} catch (IOException e1)
+					}
+					catch (IOException e1)
 					{
 						log.append("An exception occurred: " + e1.getMessage() + "\n");
 					}

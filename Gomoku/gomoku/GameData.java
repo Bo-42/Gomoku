@@ -107,12 +107,14 @@ public class GameData implements Serializable
 			if (!left || (i - idx) < 0 || board[move.getRow()][i - idx] == null)
 			{
 				left = false;
-			} else
+			}
+			else
 			{
 				if (moveColor.equals(board[move.getRow()][i - idx]))
 				{
 					lineCount++;
-				} else
+				}
+				else
 				{
 					left = false;
 				}
@@ -120,12 +122,14 @@ public class GameData implements Serializable
 			if (!right || (i + idx) > 14 || board[move.getRow()][i + idx] == null)
 			{
 				right = false;
-			} else
+			}
+			else
 			{
 				if (moveColor.equals(board[move.getRow()][i + idx]))
 				{
 					lineCount++;
-				} else
+				}
+				else
 				{
 					right = false;
 				}
@@ -134,7 +138,8 @@ public class GameData implements Serializable
 			{
 				won = true;
 				return true;
-			} else if (!left && !right)
+			}
+			else if (!left && !right)
 			{
 				return false;
 			}
@@ -156,12 +161,14 @@ public class GameData implements Serializable
 			if (!up || (i - idx) < 0 || board[i - idx][move.getColumn()] == null)
 			{
 				up = false;
-			} else
+			}
+			else
 			{
 				if (moveColor.equals(board[i - idx][move.getColumn()]))
 				{
 					lineCount++;
-				} else
+				}
+				else
 				{
 					up = false;
 				}
@@ -169,12 +176,14 @@ public class GameData implements Serializable
 			if (!down || (i + idx) > 14 || board[i + idx][move.getColumn()] == null)
 			{
 				down = false;
-			} else
+			}
+			else
 			{
 				if (moveColor.equals(board[i + idx][move.getColumn()]))
 				{
 					lineCount++;
-				} else
+				}
+				else
 				{
 					down = false;
 				}
@@ -183,7 +192,8 @@ public class GameData implements Serializable
 			{
 				won = true;
 				return true;
-			} else if (!up && !down)
+			}
+			else if (!up && !down)
 			{
 				return false;
 			}
@@ -206,12 +216,14 @@ public class GameData implements Serializable
 			if (!topL || (r - idx) < 0 || (c - idx) < 0 || board[r - idx][c - idx] == null)
 			{
 				topL = false;
-			} else
+			}
+			else
 			{
 				if (moveColor.equals(board[r - idx][c - idx]))
 				{
 					lineCount++;
-				} else
+				}
+				else
 				{
 					topL = false;
 				}
@@ -219,12 +231,14 @@ public class GameData implements Serializable
 			if (!bottomR || (r + idx) > 14 || (c + idx) > 14 || board[r + idx][c + idx] == null)
 			{
 				bottomR = false;
-			} else
+			}
+			else
 			{
 				if (moveColor.equals(board[r + idx][c + idx]))
 				{
 					lineCount++;
-				} else
+				}
+				else
 				{
 					bottomR = false;
 				}
@@ -233,7 +247,8 @@ public class GameData implements Serializable
 			{
 				won = true;
 				return true;
-			} else if (!topL && !bottomR)
+			}
+			else if (!topL && !bottomR)
 			{
 				break;
 			}
@@ -247,12 +262,14 @@ public class GameData implements Serializable
 			if (!topR || (r - idx) < 0 || (c + idx) > 14 || board[r - idx][c + idx] == null)
 			{
 				topR = false;
-			} else
+			}
+			else
 			{
 				if (moveColor.equals(board[r - idx][c + idx]))
 				{
 					lineCount++;
-				} else
+				}
+				else
 				{
 					topR = false;
 				}
@@ -260,12 +277,14 @@ public class GameData implements Serializable
 			if (!bottomL || (r + idx) > 14 || (c - idx) < 0 || board[r + idx][c - idx] == null)
 			{
 				bottomL = false;
-			} else
+			}
+			else
 			{
 				if (moveColor.equals(board[r + idx][c - idx]))
 				{
 					lineCount++;
-				} else
+				}
+				else
 				{
 					bottomL = false;
 				}
@@ -274,7 +293,8 @@ public class GameData implements Serializable
 			{
 				won = true;
 				return true;
-			} else if (!topR && !bottomL)
+			}
+			else if (!topR && !bottomL)
 			{
 				return false;
 			}

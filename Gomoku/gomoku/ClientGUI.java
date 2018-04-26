@@ -18,7 +18,8 @@ public class ClientGUI extends JFrame
 		try
 		{
 			client.openConnection();
-		} catch (IOException e)
+		}
+		catch (IOException e)
 		{
 			e.printStackTrace();
 		}

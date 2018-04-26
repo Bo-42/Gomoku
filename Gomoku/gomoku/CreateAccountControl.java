@@ -45,7 +45,8 @@ public class CreateAccountControl implements ActionListener
 			{
 				displayError("You must enter a username and password.");
 				return;
-			} else if (!password.equals(passwordVerify))
+			}
+			else if (!password.equals(passwordVerify))
 			{
 				displayError("The two passwords did not match.");
 				return;
@@ -61,7 +62,8 @@ public class CreateAccountControl implements ActionListener
 			try
 			{
 				client.sendToServer(data);
-			} catch (IOException e)
+			}
+			catch (IOException e)
 			{
 				displayError("Error connecting to the server.");
 			}

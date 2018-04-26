@@ -49,7 +49,8 @@ public class LoginControl implements ActionListener
 			try
 			{
 				client.sendToServer(data);
-			} catch (IOException e)
+			}
+			catch (IOException e)
 			{
 				displayError("Error connecting to the server.");
 			}

@@ -44,7 +44,8 @@ public class ChatClient extends AbstractClient
 			if (message.equals("Success:Login"))
 			{
 				loginControl.loginSuccess();
-			} else if (message.equals("Failure:Login"))
+			}
+			else if (message.equals("Failure:Login"))
 			{
 				loginControl.displayError("Failure:Login");
 			}
@@ -53,14 +54,17 @@ public class ChatClient extends AbstractClient
 			else if (message.equals("Success:Register"))
 			{
 				createAccountControl.createAccountSuccess();
-			} else if (message.equals("Failure:Register"))
+			}
+			else if (message.equals("Failure:Register"))
 			{
 				createAccountControl.displayError("Failure:Register");
-			} else if (message.substring(0, 6).equals("Winner:"))
+			}
+			else if (message.substring(0, 6).equals("Winner:"))
 			{
 				gpc.displayLabel(message);
 			}
-		} else if (arg0 instanceof GameData)
+		}
+		else if (arg0 instanceof GameData)
 		{
 
 			if (((GameData) arg0).isWhoseTurn() == whois)
@@ -69,7 +73,8 @@ public class ChatClient extends AbstractClient
 				{
 					gpc.displayLabel("You won!");
 					gpc.stopMouse();
-				} else
+				}
+				else
 				{
 					gpc.displayLabel("Your move");
 				}
@@ -77,20 +82,23 @@ public class ChatClient extends AbstractClient
 				// update the game board
 				gpc.drawChess(((GameData) arg0).getBoard());
 
-			} else
+			}
+			else
 			{
 				if (((GameData) arg0).checkWon())
 				{
 					gpc.displayLabel("Opponent wins!");
 					gpc.stopMouse();
-				} else
+				}
+				else
 				{
 					gpc.displayLabel("Other player's turn");
 				}
 				gpc.drawChess(((GameData) arg0).getBoard());
 			}
 
-		} else if (arg0 instanceof Boolean)
+		}
+		else if (arg0 instanceof Boolean)
 		{
 			whois = ((Boolean) arg0).booleanValue();
 			gpc.setPlayer(((Boolean) arg0).booleanValue());

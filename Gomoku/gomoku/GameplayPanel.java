@@ -52,7 +52,8 @@ public class GameplayPanel extends JPanel
 		if (color)
 		{
 			result = "white";
-		} else
+		}
+		else
 		{
 			result = "black";
 		}

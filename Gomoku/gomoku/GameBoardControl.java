@@ -27,7 +27,8 @@ public class GameBoardControl implements MouseListener
 		try
 		{
 			client.sendToServer(mo);
-		} catch (IOException e)
+		}
+		catch (IOException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();

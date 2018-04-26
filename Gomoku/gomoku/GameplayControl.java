@@ -50,13 +50,15 @@ public class GameplayControl implements ActionListener
 			try
 			{
 				client.sendToServer(new Move(-1, -1));
-			} catch (IOException e)
+			}
+			catch (IOException e)
 			{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			resign = true;
-		} else if (command == "Exit")
+		}
+		else if (command == "Exit")
 		{
 			System.exit(0);
 		}

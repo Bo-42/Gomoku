@@ -22,12 +22,14 @@ public class Database
 			try
 			{
 				prop.load(fis);
-			} catch (IOException e)
+			}
+			catch (IOException e)
 			{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} catch (FileNotFoundException e)
+		}
+		catch (FileNotFoundException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -39,7 +41,8 @@ public class Database
 		try
 		{
 			con = (Connection) DriverManager.getConnection(url, user, pass);
-		} catch (SQLException e)
+		}
+		catch (SQLException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -70,7 +73,8 @@ public class Database
 				toReturn.add(add);
 				add = "";
 			}
-		} catch (SQLException e)
+		}
+		catch (SQLException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -78,7 +82,8 @@ public class Database
 		if (toReturn.isEmpty())
 		{
 			return null;
-		} else
+		}
+		else
 		{
 			return toReturn;
 		}
@@ -93,7 +98,8 @@ public class Database
 			stmt.execute(dml);
 			return true;
 
-		} catch (SQLException e)
+		}
+		catch (SQLException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -97,18 +97,21 @@ public class ChatServer extends AbstractServer
 					client.sendToClient("Success:Login");
 					client.sendToClient(new Boolean(clients.get(0).getId() != client.getId()));
 					client.sendToClient(game);
-				} catch (IOException e)
+				}
+				catch (IOException e)
 				{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			} else
+			}
+			else
 			{
 				System.out.println("Incorrect login.");
 				try
 				{
 					client.sendToClient("Failure:Login");
-				} catch (IOException e)
+				}
+				catch (IOException e)
 				{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -128,24 +131,28 @@ public class ChatServer extends AbstractServer
 					client.sendToClient("Success:Register");
 					client.sendToClient(new Boolean(clients.get(0).getId() != client.getId()));
 					client.sendToClient(game);
-				} catch (IOException e)
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
-			} else
-			{
-				System.out.println("Username already exists.");
-				try
-				{
-					client.sendToClient("Failure:Register");
-				} catch (IOException e)
+				catch (IOException e)
 				{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
-		} else if (arg0 instanceof Move)
+			else
+			{
+				System.out.println("Username already exists.");
+				try
+				{
+					client.sendToClient("Failure:Register");
+				}
+				catch (IOException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		else if (arg0 instanceof Move)
 		{
 			long id = client.getId();
 			boolean clientNo;
@@ -154,7 +161,8 @@ public class ChatServer extends AbstractServer
 			if (id == clients.get(0).getId())
 			{
 				clientNo = false;
-			} else
+			}
+			else
 			{
 				clientNo = true;
 			}
@@ -167,30 +175,35 @@ public class ChatServer extends AbstractServer
 				{
 					clients.get(0).sendToClient(game);
 					clients.get(1).sendToClient(game);
-				} catch (IOException e)
+				}
+				catch (IOException e)
 				{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				return;
-			} else if (game.isWhoseTurn() != clientNo)
+			}
+			else if (game.isWhoseTurn() != clientNo)
 			{
 				try
 				{
 					client.sendToClient(game);
-				} catch (IOException e)
+				}
+				catch (IOException e)
 				{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				System.out.println("Not your turn");
 				return;
-			} else if (game.checkMove(move))
+			}
+			else if (game.checkMove(move))
 			{
 				try
 				{
 					client.sendToClient(game);
-				} catch (IOException e)
+				}
+				catch (IOException e)
 				{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -209,20 +222,23 @@ public class ChatServer extends AbstractServer
 					try
 					{
 						c.sendToClient(game);
-					} catch (IOException e)
+					}
+					catch (IOException e)
 					{
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
-			} else
+			}
+			else
 			{
 				game.setWhoseTurn(!clientNo);
 				for (ConnectionToClient c : clients)
 					try
 					{
 						c.sendToClient(game);
-					} catch (IOException e)
+					}
+					catch (IOException e)
 					{
 						// TODO Auto-generated catch block
 						e.printStackTrace();
