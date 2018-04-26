@@ -1,0 +1,1 @@
+java -cp .;ocsf.jar gomoku.ClientGUI localhost 8300

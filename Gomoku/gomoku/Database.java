@@ -91,4 +91,9 @@ public class Database
 		}
 		  return false;
 	  }
+	  
+	  public Connection getConnection()
+	  {
+		  return con;
+	  }
 }

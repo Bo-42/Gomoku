@@ -140,13 +140,6 @@ public class ClientGUI extends JFrame
   // Main function that creates the client GUI when the program is started.
   public static void main(String[] args)
   {
-	  if (args.length != 2)
-	  {
-		  new ClientGUI();
-	  }
-	  else
-	  {
-		  new ClientGUI(args[0], Integer.parseInt(args[1]));
-	  }
+	  new ClientGUI(args[0], Integer.parseInt(args[1]));
   }
 }
